@@ -41,6 +41,10 @@ defmodule TilWeb.PostLive.FormComponent do
   end
 
   defp save_post(socket, :new, post_params) do
+    post_params =
+      post_params
+      |> Map.merge(%{"user_id" => socket.assigns.user_id})
+
     case Posts.create_post(post_params) do
       {:ok, _post} ->
         {:noreply,

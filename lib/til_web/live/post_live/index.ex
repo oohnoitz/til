@@ -5,8 +5,12 @@ defmodule TilWeb.PostLive.Index do
   alias Til.Posts.Post
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :posts, fetch_posts())}
+  def mount(_params, session, socket) do
+    {:ok,
+     assign(socket,
+       posts: fetch_posts(),
+       user_id: session["user_id"]
+     ), temporary_assigns: [posts: []]}
   end
 
   @impl true

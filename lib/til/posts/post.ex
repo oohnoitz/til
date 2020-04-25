@@ -16,8 +16,8 @@ defmodule Til.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(attrs, [:title, :body, :user_id])
+    |> validate_required([:title, :body, :user_id])
     |> foreign_key_constraint(:user_id)
   end
 end
