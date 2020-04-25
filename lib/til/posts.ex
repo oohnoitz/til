@@ -18,7 +18,9 @@ defmodule Til.Posts do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Post
+    |> order_by([p], desc: p.id)
+    |> Repo.all()
   end
 
   @doc """
