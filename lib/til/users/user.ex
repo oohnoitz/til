@@ -13,6 +13,9 @@ defmodule Til.User do
     pow_user_fields()
     field(:role, :string, default: "user")
     field(:email_verified, :boolean, default: false)
+
+    has_many(:posts, Tpn.Posts.Post)
+
     timestamps()
   end
 

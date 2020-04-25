@@ -8,7 +8,7 @@ defmodule Til.Posts.Post do
     field(:slug, :string)
     field(:title, :string)
 
-    belongs_to(:user, Til.Users.User)
+    belongs_to(:user, Til.User)
 
     timestamps()
   end
