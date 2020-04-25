@@ -1,0 +1,34 @@
+<%= row do %>
+  <%= col do %>
+    <h1><%= gettext("Reset Password") %></h1>
+  <% end %>
+<% end %>
+<%= form_for @changeset, @action, [as: :user], fn f -> %>
+  <%= row do %>
+    <%= col do %>
+      <%= if @changeset.action do %>
+        <div class="alert alert-danger">
+          <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%= row do %>
+    <%= col do %>
+      <%= password_input_stack f, :password, label: gettext("Password"), input: [required: true, placeholder: gettext("Password")] %>
+    <% end %>
+    <%= col do %>
+      <%= password_input_stack f, :password_confirmation, label: gettext("Confirm Password"), input: [required: true, placeholder: gettext("Confirm Password")] %>
+    <% end %>
+    <%= col do %>
+      <%= submit gettext("Submit"), class: button_class() %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= row do %>
+  <%= col do %>
+    <span><%= link gettext("Sign in"), to: Routes.pow_session_path(@conn, :new) %></span>
+  <% end %>
+<% end %>
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= csrf_meta_tag() %>
+
+    <title><%= gettext("Hello til!") %></title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="rev-TopBar">
+        <nav role="navigation">
+          <div class="rev-TopBar-item">
+            <%= menu :ul, horizontalLeft: true do %>
+              <%= menu_item :li, [] do %>
+                <%= link gettext("Home"), to: Routes.page_path(@conn, :index) %>
+              <% end %>
+              <%= if Pow.Plug.current_user(@conn) == nil do %>
+                <%= menu_item :li, [] do %>
+                  <%= link gettext("Register"), to: Routes.pow_registration_path(@conn, :new) %>
+                <% end %>
+                <%= menu_item :li, [] do %>
+                  <%= link gettext("Sign In"), to: Routes.pow_session_path(@conn, :new) %>
+                <% end %>
+              <% else %>
+                <%= menu_item :li, [] do %>
+                  <%= link gettext("Settings"), to: Routes.pow_registration_path(@conn, :edit) %>
+                <% end %>
+                <%= menu_item :li, [] do %>
+                  <%= link gettext("Sign Out"), to: Routes.pow_session_path(@conn, :delete), method: :delete %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+      <%= @inner_content %>
+    </div> <!-- /container -->
+    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Starting remote iex session into til using kubectl. Current context is $(kubectl config current-context)"
+
+# Either uses the given pod from arguments or gets the first pod from the namespace
+POD=${1:-$(kubectl get pods --namespace=til -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | head -n 1)}
+
+# Remote iex into the above pod
+kubectl exec -it $POD --namespace til -- /bin/bash -c "./bin/til remote"
