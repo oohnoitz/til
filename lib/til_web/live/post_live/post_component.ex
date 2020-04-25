@@ -25,7 +25,7 @@ defmodule TilWeb.PostLive.PostComponent do
       </div>
 
       <div class="rev-Card-body">
-        <td><%= @post.body %></td>
+        <%= raw Til.Markdown.to_html(@post.body) %>
       </div>
     </article>
     """
