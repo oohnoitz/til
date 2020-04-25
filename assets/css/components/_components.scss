@@ -1,0 +1,15 @@
+.Image-placeholder {
+  @include flex(center, column, center);
+}
+
+.MediaObject {
+  @include flex(center, row, flex-start);
+  flex-wrap: nowrap;
+  position: relative;
+}
+
+.MediaObject-section {
+  &:first-child {
+    padding-right: 5px;
+  }
+}

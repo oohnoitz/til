@@ -1,5 +1,3 @@
-<h1>Show Post</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, TilWeb.PostLive.FormComponent,
     id: @post.id,
@@ -9,29 +7,28 @@
     return_to: Routes.post_show_path(@socket, :show, @post) %>
 <% end %>
 
-<ul>
+<article id="post-<%= @post.id %>" class="rev-Card">
+  <div class="rev-Card-header">
+    <div class="rev-Row">
+      <div class="rev-Col">
+        <h2><%= live_redirect @post.title, to: Routes.post_show_path(@socket, :show, @post) %></h2>
+        <div class="MediaObject">
+          <div class="MediaObject-section">
+            <div class="Image-placeholder">
+              <h3>h</h3>
+            </div>
+          </div>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
+          <div class="MediaObject-section">
+            <%= @post.user_id %>
+            <%= @post.inserted_at %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <li>
-    <strong>Body:</strong>
-    <%= @post.body %>
-  </li>
-
-  <li>
-    <strong>Slug:</strong>
-    <%= @post.slug %>
-  </li>
-
-  <li>
-    <strong>Likes:</strong>
-    <%= @post.likes %>
-  </li>
-
-</ul>
-
-<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>
+  <div class="rev-Card-body">
+    <td><%= @post.body %></td>
+  </div>
+</article>
