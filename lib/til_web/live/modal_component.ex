@@ -4,16 +4,21 @@ defmodule TilWeb.ModalComponent do
   @impl true
   def render(assigns) do
     ~L"""
-    <div id="<%= @id %>" class="phx-modal"
+    <div id="<%= @id %>" class="rev-Modal rev-Modal--open"
       phx-capture-click="close"
       phx-window-keydown="close"
       phx-key="escape"
       phx-target="#<%= @id %>"
       phx-page-loading>
 
-      <div class="phx-modal-content">
-        <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
-        <%= live_component @socket, @component, @opts %>
+      <div class="rev-Modal-content">
+        <div class="rev-Row">
+          <div class="rev-Col">
+            <%= live_patch raw("&times;"), to: @return_to, class: "rev-CloseButton" %>
+
+            <%= live_component @socket, @component, @opts %>
+          </div>
+        </div>
       </div>
     </div>
     """

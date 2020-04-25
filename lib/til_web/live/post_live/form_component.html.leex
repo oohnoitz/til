@@ -6,21 +6,17 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
-  <%= error_tag f, :title %>
+  <%= label f, :title, class: "rev-InputStack rev-InputLabel" do %>
+    Title
+    <%= text_input f, :title, class: "rev-Input" %>
+    <%= error_tag f, :title, class: "rev-InputErrors" %>
+  <% end %>
 
-  <%= label f, :body %>
-  <%= text_input f, :body %>
-  <%= error_tag f, :body %>
+  <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
+    Body
+    <%= textarea f, :body, class: "rev-Input" %>
+    <%= error_tag f, :body, class: "rev-InputErrors" %>
+  <% end %>
 
-  <%= label f, :slug %>
-  <%= textarea f, :slug %>
-  <%= error_tag f, :slug %>
-
-  <%= label f, :likes %>
-  <%= number_input f, :likes %>
-  <%= error_tag f, :likes %>
-
-  <%= submit "Save", phx_disable_with: "Saving..." %>
+  <%= submit "Save", class: "rev-Button", phx_disable_with: "Saving..." %>
 </form>
