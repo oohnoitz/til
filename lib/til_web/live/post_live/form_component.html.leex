@@ -1,0 +1,26 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "post-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :title %>
+  <%= text_input f, :title %>
+  <%= error_tag f, :title %>
+
+  <%= label f, :body %>
+  <%= text_input f, :body %>
+  <%= error_tag f, :body %>
+
+  <%= label f, :slug %>
+  <%= textarea f, :slug %>
+  <%= error_tag f, :slug %>
+
+  <%= label f, :likes %>
+  <%= number_input f, :likes %>
+  <%= error_tag f, :likes %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>
