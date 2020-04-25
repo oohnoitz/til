@@ -6,6 +6,8 @@ defmodule TilWeb.PostLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
+    if connected?(socket), do: Posts.subscribe()
+
     {:ok,
      assign(socket,
        posts: fetch_posts(),
@@ -42,6 +44,16 @@ defmodule TilWeb.PostLive.Index do
     {:ok, _} = Posts.delete_post(post)
 
     {:noreply, assign(socket, :posts, fetch_posts())}
+  end
+
+  @impl true
+  def handle_info({:post_created, post}, socket) do
+    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
+  end
+
+  @impl true
+  def handle_info({:post_updated, post}, socket) do
+    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end
 
   defp fetch_posts do
