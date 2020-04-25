@@ -1,5 +1,6 @@
 defmodule TilWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :til
+
   @session_options [
     store: :cookie,
     key: "_til_key",
@@ -12,8 +13,7 @@ defmodule TilWeb.Endpoint do
 
   socket("/socket", TilWeb.UserSocket, websocket: true)
 
-  socket "/live", Phoenix.LiveView.Socket,
-    websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #

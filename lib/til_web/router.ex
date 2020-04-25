@@ -65,7 +65,6 @@ defmodule TilWeb.Router do
     get "/", PageController, :index
     get "/styleguide", PageController, :styleguide
 
-
     live "/posts", PostLive.Index, :index
     live "/posts/new", PostLive.Index, :new
     live "/posts/:id/edit", PostLive.Index, :edit

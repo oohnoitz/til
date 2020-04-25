@@ -34,10 +34,10 @@ defmodule TilWeb.ErrorReporter.Test do
     params = %{"password" => "password", "user" => %{"new_password" => "new_password"}}
 
     assert ErrorReporter.sanitize(params) == %{
-      "password" => "[FILTERED]",
-      "user" => %{
-        "new_password" => "[FILTERED]"
-      }
-    }
+             "password" => "[FILTERED]",
+             "user" => %{
+               "new_password" => "[FILTERED]"
+             }
+           }
   end
 end

@@ -7,7 +7,12 @@ defmodule Til.PostsTest do
     alias Til.Posts.Post
 
     @valid_attrs %{body: "some body", likes: 42, slug: "some slug", title: "some title"}
-    @update_attrs %{body: "some updated body", likes: 43, slug: "some updated slug", title: "some updated title"}
+    @update_attrs %{
+      body: "some updated body",
+      likes: 43,
+      slug: "some updated slug",
+      title: "some updated title"
+    }
     @invalid_attrs %{body: nil, likes: nil, slug: nil, title: nil}
 
     def post_fixture(attrs \\ %{}) do

@@ -26,7 +26,7 @@ config :til, Til.Mailer, adapter: Bamboo.TestAdapter
 config :til,
   s3_signer: Til.S3Signer.Mock
 
-  config :hound,
+config :hound,
   driver: "selenium",
   browser: "chrome",
   app_port: 4001,

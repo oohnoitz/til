@@ -1,4 +1,5 @@
 use Mix.Config
+
 # NOTE: Compile-time production configuration goes here
 
 config :til, TilWeb.Endpoint,
