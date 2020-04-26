@@ -1,6 +1,7 @@
 defmodule TilWeb.PostLive.PostComponent do
   use TilWeb, :live_component
 
+  @impl true
   def render(assigns) do
     ~L"""
     <article id="post-<%= @post.id %>" class="rev-Card">

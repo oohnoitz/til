@@ -5,6 +5,7 @@ defmodule Til.Posts.Post do
   schema "posts" do
     field(:title, :string)
     field(:body, :string, default: "")
+    field(:slug, :string)
     field(:likes, :integer, default: 0)
 
     belongs_to(:user, Til.User)
