@@ -10,7 +10,8 @@ defmodule TilWeb.PostLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> assign(:preview?, false)}
   end
 
   @impl true
@@ -21,6 +22,10 @@ defmodule TilWeb.PostLive.FormComponent do
       |> Map.put(:action, :validate)
 
     {:noreply, assign(socket, :changeset, changeset)}
+  end
+
+  def handle_event("mode", %{"mode" => mode}, socket) when mode in ["write", "preview"] do
+    {:noreply, assign(socket, :preview?, mode === "preview")}
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do

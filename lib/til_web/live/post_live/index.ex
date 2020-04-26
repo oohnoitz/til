@@ -7,9 +7,7 @@ defmodule TilWeb.PostLive.Index do
   def mount(_params, _session, socket) do
     if connected?(socket), do: Posts.subscribe()
 
-    {:ok,
-      assign(socket, posts: fetch_posts()),
-      temporary_assigns: [posts: []]}
+    {:ok, assign(socket, posts: fetch_posts()), temporary_assigns: [posts: []]}
   end
 
   @impl true
