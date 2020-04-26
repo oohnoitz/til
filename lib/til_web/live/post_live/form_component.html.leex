@@ -6,44 +6,51 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%= label f, :title, class: "rev-InputStack rev-InputLabel" do %>
-    Title
-    <%= text_input f, :title, class: "rev-Input" %>
-    <%= error_tag f, :title, class: "rev-InputErrors" %>
-  <% end %>
+  <div class="rev-Row">
+    <div class="rev-Col rev-Col--large9">
+      <%= label f, :title, class: "rev-InputStack rev-InputLabel" do %>
+        Title
+        <%= text_input f, :title, class: "rev-Input" %>
+        <%= error_tag f, :title, class: "rev-InputErrors" %>
+      <% end %>
+    </div>
 
+    <div class="rev-Col rev-Col--large3">
+      <%= select_stack f, :tag, @tags, label: "Tags" %>
+    </div>
 
-  <div class="rev-Tabs">
-    <ul class="rev-Tabs-titles">
-      <li class="rev-TabsTitle<%= unless @preview?, do: " rev-TabsTitle--selected" %>">
-        <a href="#" class="rev-TabsTitle-link" phx-click="mode" phx-value-mode="write" phx-target="<%= @myself %>">Write</a>
-      </li>
-      <li class="rev-TabsTitle<%= if @preview?, do: " rev-TabsTitle--selected" %>">
-        <a href="#" class="rev-TabsTitle-link" phx-click="mode" phx-value-mode="preview" phx-target="<%= @myself %>">Preview</a>
-      </li>
-    </ul>
+    <div class="rev-Col">
+      <div class="rev-Tabs">
+        <ul class="rev-Tabs-titles">
+          <li class="rev-TabsTitle<%= unless @preview?, do: " rev-TabsTitle--selected" %>">
+            <a href="#" class="rev-TabsTitle-link" phx-click="mode" phx-value-mode="write" phx-target="<%= @myself %>">Write</a>
+          </li>
+          <li class="rev-TabsTitle<%= if @preview?, do: " rev-TabsTitle--selected" %>">
+            <a href="#" class="rev-TabsTitle-link" phx-click="mode" phx-value-mode="preview" phx-target="<%= @myself %>">Preview</a>
+          </li>
+        </ul>
 
-    <div class="rev-Tabs-content">
-      <div class="rev-Row">
-        <div class="rev-Col">
-          <%= if @preview? do %>
-            <div class="PostPreview" phx-hook="CodeHighlight">
-              <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
+        <div class="rev-Tabs-content">
+          <div class="rev-Row">
+            <div class="rev-Col">
+              <%= if @preview? do %>
+                <div class="PostPreview" phx-hook="CodeHighlight">
+                  <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
+                </div>
+                <%= hidden_input f, :body %>
+                <%= error_tag f, :body, class: "rev-InputErrors" %>
+              <% else %>
+                <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
+                  <%= textarea f, :body, class: "rev-Input" %>
+                  <%= error_tag f, :body, class: "rev-InputErrors" %>
+                <% end %>
+              <% end %>
             </div>
-            <%= hidden_input f, :body %>
-            <%= error_tag f, :body, class: "rev-InputErrors" %>
-          <% else %>
-            <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
-              <%= textarea f, :body, class: "rev-Input" %>
-              <%= error_tag f, :body, class: "rev-InputErrors" %>
-            <% end %>
-          <% end %>
+          </div>
         </div>
       </div>
+
+      <%= submit "Save", class: "rev-Button", phx_disable_with: "Saving..." %>
     </div>
   </div>
-
-  <%= select_stack f, :tag, @tags, label: "Tags" %>
-
-  <%= submit "Save", class: "rev-Button", phx_disable_with: "Saving..." %>
 </form>
