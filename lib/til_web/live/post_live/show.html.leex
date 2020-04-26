@@ -1,31 +1,5 @@
 <div class="rev-Col rev-Col--large9 rev-Col--smallCentered">
-  <article id="post-<%= @post.id %>" class="rev-Card">
-    <div class="rev-Card-header">
-      <div class="rev-Row">
-        <div class="rev-Col">
-          <h2><%= live_redirect @post.title, to: Routes.post_show_path(@socket, :show, @post) %></h2>
-          <div class="MediaObject">
-            <div class="MediaObject-section">
-              <div class="Image-placeholder">
-                <h3>h</h3>
-              </div>
-            </div>
-
-            <div class="MediaObject-section">
-              <%= @post.user_id %>
-              <%= @post.inserted_at %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="rev-Card-body">
-      <div class="rev-Row">
-        <div class="rev-Col rev-Col--large--10">
-          <%= raw Til.Markdown.to_html(@post.body) %>
-        </div>
-      </div>
-    </div>
-  </article>
+  <section>
+    <%= live_component @socket, TilWeb.PostLive.PostComponent, id: @post.id, post: @post %>
+  </section>
 </div>

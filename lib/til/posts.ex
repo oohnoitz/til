@@ -115,9 +115,9 @@ defmodule Til.Posts do
     Phoenix.PubSub.subscribe(Til.PubSub, "posts")
   end
 
-  def broadcast({:error, _reason} = error, _event), do: error
+  defp broadcast({:error, _reason} = error, _event), do: error
 
-  def broadcast({:ok, post}, event) do
+  defp broadcast({:ok, post}, event) do
     Phoenix.PubSub.broadcast(Til.PubSub, "posts", {event, post})
 
     {:ok, post}
