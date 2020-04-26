@@ -111,6 +111,14 @@ defmodule Til.Posts do
     Post.changeset(post, attrs)
   end
 
+  def increment_likes(%Post{id: id}) do
+    Post
+    |> where([p], p.id == ^id)
+    |> Repo.update_all(inc: [likes: 1])
+
+    broadcast({:ok, get_post!(id)}, :post_updated)
+  end
+
   def subscribe do
     Phoenix.PubSub.subscribe(Til.PubSub, "posts")
   end

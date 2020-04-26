@@ -42,11 +42,20 @@ defmodule TilWeb.PostLive.PostComponent do
             Raw
           </div>
           <div class="rev-Col rev-Col--small3">
-            <i class="gg-heart"></i> <%= @post.likes %>
+            <button type="button" phx-click="like" phx-target="<%= @myself %>">
+              <i class="gg-heart"></i> <%= @post.likes %>
+            </button>
           </div>
         </div>
       </div>
     </article>
     """
+  end
+
+  @impl true
+  def handle_event("like", _, socket) do
+    Til.Posts.increment_likes(socket.assigns.post)
+
+    {:noreply, socket}
   end
 end
