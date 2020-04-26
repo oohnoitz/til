@@ -13,6 +13,7 @@ defmodule TilWeb.PostLive.Index do
   @impl true
   def handle_params(params, _url, socket) do
     {page, ""} = Integer.parse(params["page"] || "1")
+    page = if page < 1, do: 1, else: page
 
     {:noreply,
      socket
