@@ -24,18 +24,22 @@
     </ul>
 
     <div class="rev-Tabs-content">
-      <%= if @preview? do %>
-        <div phx-hook="CodeHighlight">
-          <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
+      <div class="rev-Row">
+        <div class="rev-Col">
+          <%= if @preview? do %>
+            <div class="PostPreview" phx-hook="CodeHighlight">
+              <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
+            </div>
+            <%= hidden_input f, :body %>
+            <%= error_tag f, :body, class: "rev-InputErrors" %>
+          <% else %>
+            <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
+              <%= textarea f, :body, class: "rev-Input" %>
+              <%= error_tag f, :body, class: "rev-InputErrors" %>
+            <% end %>
+          <% end %>
         </div>
-        <%= hidden_input f, :body %>
-        <%= error_tag f, :body, class: "rev-InputErrors" %>
-      <% else %>
-        <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
-          <%= textarea f, :body, class: "rev-Input" %>
-          <%= error_tag f, :body, class: "rev-InputErrors" %>
-        <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 

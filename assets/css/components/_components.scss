@@ -2,6 +2,18 @@ code {
   border: none;
 }
 
+.rev-Tabs-content {
+  padding: 12px 0;
+
+  .rev-InputLabel {
+    margin: 0;
+  }
+
+  textarea {
+    min-height: 300px;
+  }
+}
+
 .rev-Tabs-titles {
   border: none;
   border-bottom: $tabs-border-size solid $tabs-border-color;
@@ -30,4 +42,8 @@ code {
   &:first-child {
     padding-right: 5px;
   }
+}
+
+.PostPreview {
+  padding: 12px;
 }
