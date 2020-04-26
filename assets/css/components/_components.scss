@@ -1,3 +1,7 @@
+code {
+  border: none;
+}
+
 .Image-placeholder {
   @include flex(center, column, center);
 }

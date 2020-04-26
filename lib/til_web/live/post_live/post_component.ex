@@ -24,7 +24,7 @@ defmodule TilWeb.PostLive.PostComponent do
         </div>
       </div>
 
-      <div class="rev-Card-body">
+      <div class="rev-Card-body" phx-hook="CodeHighlight">
         <div class="rev-Row">
           <div class="rev-Col">
             <%= raw Til.Markdown.to_html(@post.body) %>

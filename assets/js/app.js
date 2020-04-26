@@ -2,6 +2,7 @@ import 'phoenix_html'
 import {DateTime} from 'luxon'
 import feather from 'feather-icons'
 import Harmonium from './harmonium'
+import LiveHooks from './live_hooks'
 import LiveSocket from 'phoenix_live_view'
 import {Socket} from 'phoenix'
 
@@ -31,6 +32,7 @@ function setupLiveView() {
   if (csrfTokenHeader) {
     const csrfToken = csrfTokenHeader.getAttribute('content')
     const liveSocket = new LiveSocket('/live', Socket, {
+      hooks: LiveHooks,
       params: {_csrf_token: csrfToken},
     })
 
