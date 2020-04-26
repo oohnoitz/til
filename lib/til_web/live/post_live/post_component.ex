@@ -33,16 +33,13 @@ defmodule TilWeb.PostLive.PostComponent do
         </div>
 
         <div class="rev-Row">
-          <div class="rev-Col rev-Col--small3">
+          <div class="rev-Col rev-Col--small4">
             Type
           </div>
-          <div class="rev-Col rev-Col--small3">
-            Permalink
+          <div class="rev-Col rev-Col--small4">
+            <%= live_redirect "Permalink", to: Routes.post_show_path(@socket, :show, @post) %>
           </div>
-          <div class="rev-Col rev-Col--small3">
-            Raw
-          </div>
-          <div class="rev-Col rev-Col--small3">
+          <div class="rev-Col rev-Col--small4">
             <button type="button" phx-click="like" phx-target="<%= @myself %>">
               <i class="gg-heart"></i> <%= @post.likes %>
             </button>
