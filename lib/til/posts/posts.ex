@@ -20,7 +20,7 @@ defmodule Til.Posts do
   def list_posts do
     Post
     |> order_by([p], desc: p.id)
-    |> preload([:user])
+    |> preload([:tag, :user])
     |> Repo.all()
   end
 
@@ -40,7 +40,7 @@ defmodule Til.Posts do
   """
   def get_post!(id) do
     Post
-    |> preload([:user])
+    |> preload([:tag, :user])
     |> Repo.get!(id)
   end
 
@@ -60,7 +60,7 @@ defmodule Til.Posts do
   """
   def get_post_by_slug!(slug) do
     Post
-    |> preload([:user])
+    |> preload([:tag, :user])
     |> Repo.get_by!(slug: slug)
   end
 

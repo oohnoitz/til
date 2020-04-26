@@ -43,5 +43,7 @@
     </div>
   </div>
 
+  <%= select_stack f, :tag, @tags, label: "Tags" %>
+
   <%= submit "Save", class: "rev-Button", phx_disable_with: "Saving..." %>
 </form>

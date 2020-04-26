@@ -4,7 +4,7 @@ defmodule Til.Tags.Tag do
   import Ecto.Changeset
 
   schema "tags" do
-    field :name, :string
+    field(:name, :string)
 
     has_many(:posts, Til.Posts.Post)
 
