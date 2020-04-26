@@ -6,7 +6,7 @@ defmodule Til.Repo.Migrations.CreatePosts do
       add(:title, :string)
       add(:body, :text)
       add(:slug, :string)
-      add(:likes, :integer)
+      add(:likes, :integer, default: 0)
 
       add(:user_id, references(:users, on_delete: :delete_all))
 
