@@ -79,6 +79,7 @@ defmodule Til.Posts do
   def create_post(attrs \\ %{}) do
     %Post{}
     |> Post.changeset(attrs)
+    |> Post.add_slug()
     |> Repo.insert()
     |> broadcast(:post_created)
   end

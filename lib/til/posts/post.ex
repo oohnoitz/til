@@ -18,12 +18,12 @@ defmodule Til.Posts.Post do
   def changeset(post, attrs) do
     post
     |> cast(attrs, [:title, :body, :tag_id, :user_id])
-    |> validate_required([:title, :body, :user_id])
-    |> add_slug()
+    |> validate_required([:title, :body, :tag_id, :user_id])
+    |> foreign_key_constraint(:tag_id)
     |> foreign_key_constraint(:user_id)
   end
 
-  defp add_slug(changeset) do
+  def add_slug(changeset) do
     case get_field(changeset, :slug) do
       nil ->
         put_change(
@@ -35,6 +35,7 @@ defmodule Til.Posts.Post do
       _ ->
         changeset
     end
+    |> validate_required([:slug])
   end
 
   def generate_slug_for_title(title) do

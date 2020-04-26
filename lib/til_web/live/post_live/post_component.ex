@@ -34,7 +34,7 @@ defmodule TilWeb.PostLive.PostComponent do
 
         <div class="rev-Row">
           <div class="rev-Col rev-Col--small4">
-            Type
+            <%= @post.tag.name %>
           </div>
           <div class="rev-Col rev-Col--small4">
             <%= live_redirect "Permalink", to: Routes.post_show_path(@socket, :show, @post) %>
