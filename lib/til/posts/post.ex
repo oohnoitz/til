@@ -8,6 +8,7 @@ defmodule Til.Posts.Post do
     field(:slug, :string)
     field(:likes, :integer, default: 0)
 
+    belongs_to(:tag, Til.Posts.Tag)
     belongs_to(:user, Til.User)
 
     timestamps()
@@ -16,7 +17,7 @@ defmodule Til.Posts.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body, :user_id])
+    |> cast(attrs, [:title, :body, :tag_id, :user_id])
     |> validate_required([:title, :body, :user_id])
     |> add_slug()
     |> foreign_key_constraint(:user_id)
