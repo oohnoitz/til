@@ -8,7 +8,7 @@ defmodule Til.Posts.Post do
     field(:slug, :string)
     field(:likes, :integer, default: 0)
 
-    belongs_to(:tag, Til.Posts.Tag)
+    belongs_to(:tag, Til.Tags.Tag)
     belongs_to(:user, Til.User)
 
     timestamps()

@@ -1,4 +1,4 @@
-defmodule Til.Posts.Tag do
+defmodule Til.Tags.Tag do
   use Adminable
   use Ecto.Schema
   import Ecto.Changeset

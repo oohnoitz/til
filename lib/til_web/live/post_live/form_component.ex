@@ -2,6 +2,7 @@ defmodule TilWeb.PostLive.FormComponent do
   use TilWeb, :live_component
 
   alias Til.Posts
+  alias Til.Tags
 
   @impl true
   def update(%{post: post} = assigns, socket) do
@@ -11,6 +12,7 @@ defmodule TilWeb.PostLive.FormComponent do
      socket
      |> assign(assigns)
      |> assign(:changeset, changeset)
+     |> assign(:tags, Tags.name_and_ids())
      |> assign(:preview?, false)}
   end
 

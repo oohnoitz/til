@@ -85,7 +85,7 @@ defmodule TilWeb.Router do
     forward("/", Adminable.Plug,
       otp_app: :til,
       repo: Til.Repo,
-      schemas: [Til.User, Til.Posts.Tag],
+      schemas: [Til.User, Til.Tags.Tag],
       layout: {TilWeb.LayoutView, "app.html"}
     )
   end
