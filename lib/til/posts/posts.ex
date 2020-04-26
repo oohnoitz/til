@@ -24,6 +24,13 @@ defmodule Til.Posts do
     |> Repo.all()
   end
 
+  def list_posts(page) do
+    Post
+    |> order_by([p], desc: p.id)
+    |> preload([:tag, :user])
+    |> Repo.paginate(page: page, page_size: 2)
+  end
+
   @doc """
   Gets a single post.
 
