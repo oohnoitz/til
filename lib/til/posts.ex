@@ -20,6 +20,7 @@ defmodule Til.Posts do
   def list_posts do
     Post
     |> order_by([p], desc: p.id)
+    |> preload([:user])
     |> Repo.all()
   end
 
@@ -37,7 +38,11 @@ defmodule Til.Posts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id) do
+    Post
+    |> preload([:user])
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a post.

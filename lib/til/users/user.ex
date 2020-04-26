@@ -11,6 +11,7 @@ defmodule Til.User do
   @type t :: %__MODULE__{}
   schema "users" do
     pow_user_fields()
+    field(:name, :string)
     field(:role, :string, default: "user")
     field(:email_verified, :boolean, default: false)
 
@@ -23,6 +24,7 @@ defmodule Til.User do
     schema
     |> pow_changeset(attrs)
     |> pow_extension_changeset(attrs)
+    |> cast(attrs, [:name])
   end
 
   def update_changeset(schema, attrs \\ %{}) do

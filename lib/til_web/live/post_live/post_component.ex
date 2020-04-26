@@ -11,13 +11,13 @@ defmodule TilWeb.PostLive.PostComponent do
             <div class="MediaObject">
               <div class="MediaObject-section">
                 <div class="Image-placeholder">
-                  <h3>h</h3>
+                  <h3><%= String.first(@post.user.name) %></h3>
                 </div>
               </div>
 
               <div class="MediaObject-section">
-                <%= @post.user_id %>
-                <%= @post.inserted_at %>
+                <%= @post.user.name %>
+                <time><%= @post.inserted_at %></time>
               </div>
             </div>
           </div>
@@ -25,7 +25,11 @@ defmodule TilWeb.PostLive.PostComponent do
       </div>
 
       <div class="rev-Card-body">
-        <%= raw Til.Markdown.to_html(@post.body) %>
+        <div class="rev-Row">
+          <div class="rev-Col">
+            <%= raw Til.Markdown.to_html(@post.body) %>
+          </div>
+        </div>
       </div>
     </article>
     """
