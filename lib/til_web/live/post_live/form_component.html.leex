@@ -29,6 +29,7 @@
           <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
         </div>
         <%= hidden_input f, :body %>
+        <%= error_tag f, :body, class: "rev-InputErrors" %>
       <% else %>
         <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
           <%= textarea f, :body, class: "rev-Input" %>

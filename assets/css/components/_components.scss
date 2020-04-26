@@ -2,6 +2,20 @@ code {
   border: none;
 }
 
+.rev-Tabs-titles {
+  border: none;
+  border-bottom: $tabs-border-size solid $tabs-border-color;
+}
+
+.rev-TabsTitle {
+  border-left: $tabs-border-size solid $tabs-border-color;
+  border-top: $tabs-border-size solid $tabs-border-color;
+
+  + .rev-TabsTitle {
+    border-left: none;
+  }
+}
+
 .Image-placeholder {
   @include flex(center, column, center);
 }
