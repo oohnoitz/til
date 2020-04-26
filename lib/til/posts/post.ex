@@ -3,10 +3,9 @@ defmodule Til.Posts.Post do
   import Ecto.Changeset
 
   schema "posts" do
-    field(:body, :string)
-    field(:likes, :integer, default: 0)
-    field(:slug, :string)
     field(:title, :string)
+    field(:body, :string, default: "")
+    field(:likes, :integer, default: 0)
 
     belongs_to(:user, Til.User)
 
