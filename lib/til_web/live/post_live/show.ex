@@ -4,8 +4,8 @@ defmodule TilWeb.PostLive.Show do
   alias Til.Posts
 
   @impl true
-  def mount(%{"id" => id}, _session, socket) do
-    post = Posts.get_post!(id)
+  def mount(%{"slug" => slug}, _session, socket) do
+    post = Posts.get_post_by_slug!(slug)
 
     if connected?(socket), do: Posts.subscribe("post:#{post.id}")
 

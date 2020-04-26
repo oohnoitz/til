@@ -45,6 +45,26 @@ defmodule Til.Posts do
   end
 
   @doc """
+  Gets a single post.
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> get_post_by_slug!("123-slug")
+      %Post{}
+
+      iex> get_post_by_slug!("123-slug")
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post_by_slug!(slug) do
+    Post
+    |> preload([:user])
+    |> Repo.get_by!(slug: slug)
+  end
+
+  @doc """
   Creates a post.
 
   ## Examples

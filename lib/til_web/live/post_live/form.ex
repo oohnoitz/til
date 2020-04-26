@@ -14,10 +14,10 @@ defmodule TilWeb.PostLive.Form do
     {:noreply, apply_action(socket, action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
+  defp apply_action(socket, :edit, %{"slug" => slug}) do
     socket
     |> assign(:page_title, "Edit Post")
-    |> assign(:post, Posts.get_post!(id))
+    |> assign(:post, Posts.get_post_by_slug!(slug))
   end
 
   defp apply_action(socket, :new, _params) do
