@@ -30,6 +30,21 @@ defmodule TilWeb.PostLive.PostComponent do
             <%= raw Til.Markdown.to_html(@post.body) %>
           </div>
         </div>
+
+        <div class="rev-Row">
+          <div class="rev-Col rev-Col--small3">
+            Type
+          </div>
+          <div class="rev-Col rev-Col--small3">
+            Permalink
+          </div>
+          <div class="rev-Col rev-Col--small3">
+            Raw
+          </div>
+          <div class="rev-Col rev-Col--small3">
+            <i class="gg-heart"></i> <%= @post.likes %>
+          </div>
+        </div>
       </div>
     </article>
     """

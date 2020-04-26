@@ -4,7 +4,7 @@ defmodule Til.Posts.Post do
 
   schema "posts" do
     field(:body, :string)
-    field(:likes, :integer)
+    field(:likes, :integer, default: 0)
     field(:slug, :string)
     field(:title, :string)
 
