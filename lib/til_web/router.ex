@@ -66,11 +66,10 @@ defmodule TilWeb.Router do
     get "/styleguide", PageController, :styleguide
 
     live "/posts", PostLive.Index, :index
-    live "/posts/new", PostLive.Index, :new
-    live "/posts/:id/edit", PostLive.Index, :edit
+    live "/posts/new", PostLive.Form, :new
+    live "/posts/:id/edit", PostLive.Form, :edit
 
     live "/posts/:id", PostLive.Show, :show
-    live "/posts/:id/show/edit", PostLive.Show, :edit
   end
 
   if Mix.env() == :dev do

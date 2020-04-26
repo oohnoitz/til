@@ -1,0 +1,11 @@
+<div class="rev-Col rev-Col--large9 rev-Col--smallCentered">
+  <section>
+    <%= live_component @socket, TilWeb.PostLive.FormComponent,
+      id: @post.id || :new,
+      title: @page_title,
+      action: @live_action,
+      post: @post,
+      user_id: @user_id
+    %>
+  </section>
+</div>
