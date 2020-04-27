@@ -17,8 +17,8 @@ defmodule TilWeb.PostLive.PostComponent do
               </div>
 
               <div class="MediaObject-section">
-                <%= @post.user.name %>
-                <time><%= @post.inserted_at %></time>
+                <p><%= @post.user.name %></p>
+                <p><%= @post.inserted_at %></p>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@ defmodule TilWeb.PostLive.PostComponent do
 
         <div class="rev-Row">
           <div class="rev-Col rev-Col--small4">
-            <%= @post.tag.name %>
+            #<%= @post.tag.name %>
           </div>
           <div class="rev-Col rev-Col--small4">
             <%= live_redirect "Permalink", to: Routes.post_show_path(@socket, :show, @post) %>

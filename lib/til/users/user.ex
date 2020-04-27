@@ -15,7 +15,7 @@ defmodule Til.User do
     field(:role, :string, default: "user")
     field(:email_verified, :boolean, default: false)
 
-    has_many(:posts, Tpn.Posts.Post)
+    has_many(:posts, Til.Posts.Post)
 
     timestamps()
   end
