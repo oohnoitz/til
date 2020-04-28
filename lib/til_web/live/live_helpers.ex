@@ -27,4 +27,11 @@ defmodule TilWeb.LiveHelpers do
 
   def tab_class(_),
     do: "bg-white inline-block py-2 px-4 text-gray-500 hover:text-gray-800 font-semibold"
+
+  def pagination_class(page, total) when page < 1 or page > total,
+    do: "block py-2 px-4 text-gray-400 cursor-not-allowed"
+
+  def pagination_class(_, _),
+    do:
+      "text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4"
 end

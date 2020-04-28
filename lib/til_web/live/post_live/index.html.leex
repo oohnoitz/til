@@ -4,11 +4,15 @@
   <% end %>
 </section>
 
-<section>
-  <%= unless @page == 1 do %>
-    <%= live_patch "Newer", to: Routes.post_index_path(@socket, :index, page: @page - 1) %>
-  <% end %>
-  <%= if @page < @posts.total_pages do %>
-    <%= live_patch "Older", to: Routes.post_index_path(@socket, :index, page: @page + 1) %>
-  <% end %>
-</section>
+<ul class="flex max-w-3xl m-auto pt-5 pb-5">
+  <li class="text-center flex-1 mr-2">
+    <%= if @page > 1 do %>
+      <%= live_patch "Newer", to: Routes.post_index_path(@socket, :index, page: @page - 1), class: pagination_class(@page - 1, @posts.total_pages) %>
+    <% end %>
+  </li>
+  <li class="text-center flex-1 mr-2">
+    <%= if @page < @posts.total_pages do %>
+      <%= live_patch "Older", to: Routes.post_index_path(@socket, :index, page: @page + 1), class: pagination_class(@page + 1, @posts.total_pages) %>
+    <% end %>
+  </li>
+</ul>
