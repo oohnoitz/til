@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <%= csrf_meta_tag() %>
 
-    <title><%= gettext("Hello til!") %></title>
+    <%= live_title_tag assigns[:page_title] || "0x0", suffix: " · Today I Learned" %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
 

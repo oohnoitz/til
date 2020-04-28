@@ -17,7 +17,7 @@ defmodule TilWeb.PostLive.Index do
 
     {:noreply,
      socket
-     |> assign(page_title: "Listing Posts", page: page)
+     |> assign(page: page)
      |> assign(page_update: :replace)
      |> fetch_posts()}
   end

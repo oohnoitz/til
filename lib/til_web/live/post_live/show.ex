@@ -11,7 +11,8 @@ defmodule TilWeb.PostLive.Show do
 
     {:ok,
      socket
-     |> assign(:post, post)}
+     |> assign(:post, post)
+     |> apply_title(socket.assigns.live_action)}
   end
 
   @impl true
@@ -22,13 +23,25 @@ defmodule TilWeb.PostLive.Show do
 
     {:ok,
      socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:post, post)}
+     |> assign(:post, post)
+     |> apply_title(socket.assigns.live_action)}
   end
 
   @impl true
   def handle_info({:post_updated, post}, socket) do
     {:noreply, update(socket, :post, fn _ -> post end)}
+  end
+
+  defp apply_title(socket, :show) do
+    socket
+    |> assign(:page_title, socket.assigns.post.title)
+    |> assign(:title, page_title(:show))
+  end
+
+  defp apply_title(socket, :edit) do
+    socket
+    |> assign(:page_title, page_title(:edit))
+    |> assign(:title, page_title(:edit))
   end
 
   defp page_title(:show), do: "Show Post"
