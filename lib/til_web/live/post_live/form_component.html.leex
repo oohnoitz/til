@@ -1,56 +1,64 @@
-<h2><%= @title %></h2>
+<div class="font-bold text-3xl mb-3"><%= @title %></div>
 
 <%= f = form_for @changeset, "#",
   id: "post-form",
+  class: "max-w-3xl",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <div class="rev-Row">
-    <div class="rev-Col rev-Col--large9">
-      <%= label f, :title, class: "rev-InputStack rev-InputLabel" do %>
-        Title
-        <%= text_input f, :title, class: "rev-Input" %>
-        <%= error_tag f, :title, class: "rev-InputErrors" %>
-      <% end %>
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <%= label f, :title, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= text_input f, :title, class: "appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" %>
+      <%= error_tag f, :title, class: "text-red-500 text-xs italic" %>
     </div>
-
-    <div class="rev-Col rev-Col--large3">
-      <%= select_stack f, :tag_id, @tags, label: "Tags" %>
+    <div class="w-full md:w-1/2 px-3">
+      <%= label f, :tag_id, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
+      <%= select f, :tag_id, @tags, class: "block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
     </div>
+  </div>
 
-    <div class="rev-Col">
-      <div class="rev-Tabs">
-        <ul class="rev-Tabs-titles">
-          <li class="rev-TabsTitle<%= unless @preview?, do: " rev-TabsTitle--selected" %>">
-            <a href="#" class="rev-TabsTitle-link" phx-click="mode" phx-value-mode="write" phx-target="<%= @myself %>">Write</a>
-          </li>
-          <li class="rev-TabsTitle<%= if @preview?, do: " rev-TabsTitle--selected" %>">
-            <a href="#" class="rev-TabsTitle-link" phx-click="mode" phx-value-mode="preview" phx-target="<%= @myself %>">Preview</a>
-          </li>
-        </ul>
+  <ul class="flex border-b">
+    <li class="-mb-px mr-1">
+      <%= link "Write",
+        to: "#",
+        class: tab_class(!@preview?),
+        phx_click: :mode,
+        phx_value_mode: :write,
+        phx_target: @myself
+      %>
+    </li>
+    <li class="-mb-px mr-1">
+      <%= link "Preview",
+        to: "#",
+        class: tab_class(@preview?),
+        phx_click: :mode,
+        phx_value_mode: :preview,
+        phx_target: @myself
+      %>
+    </li>
+  </ul>
 
-        <div class="rev-Tabs-content">
-          <div class="rev-Row">
-            <div class="rev-Col">
-              <%= if @preview? do %>
-                <div class="PostPreview" phx-hook="CodeHighlight">
-                  <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
-                </div>
-                <%= hidden_input f, :body %>
-                <%= error_tag f, :body, class: "rev-InputErrors" %>
-              <% else %>
-                <%= label f, :body, class: "rev-InputStack rev-InputLabel" do %>
-                  <%= textarea f, :body, class: "rev-Input" %>
-                  <%= error_tag f, :body, class: "rev-InputErrors" %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
+  <div class="flex flex-wrap mb-6 pt-5 border-b border-l border-r">
+    <%= if @preview? do %>
+      <div class="w-full px-3">
+        <div class="w-full py-3 px-4 mb-3" phx-hook="CodeHighlight">
+          <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
         </div>
       </div>
+    <% else %>
+      <div class="w-full px-3">
+        <%= textarea f, :body, class: "appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white h-64" %>
+        <%= error_tag f, :body, class: "text-red-500 text-xs italic" %>
+      </div>
+    <% end %>
+  </div>
 
-      <%= submit "Save", class: "rev-Button", phx_disable_with: "Saving..." %>
-    </div>
+  <div class="flex items-center justify-between">
+    <%= submit "Save",
+      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
+      phx_disable_with: "Saving..."
+    %>
   </div>
 </form>

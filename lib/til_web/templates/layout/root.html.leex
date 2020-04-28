@@ -13,35 +13,30 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="rev-TopBar">
-        <nav role="navigation">
-          <div class="rev-TopBar-item">
-            <%= menu :ul, horizontalLeft: true do %>
-              <%= menu_item :li, [] do %>
-                <%= link gettext("Home"), to: Routes.page_path(@conn, :index) %>
-              <% end %>
-              <%= if Pow.Plug.current_user(@conn) == nil do %>
-                <%= menu_item :li, [] do %>
-                  <%= link gettext("Register"), to: Routes.pow_registration_path(@conn, :new) %>
-                <% end %>
-                <%= menu_item :li, [] do %>
-                  <%= link gettext("Sign In"), to: Routes.pow_session_path(@conn, :new) %>
-                <% end %>
-              <% else %>
-                <%= menu_item :li, [] do %>
-                  <%= link gettext("Settings"), to: Routes.pow_registration_path(@conn, :edit) %>
-                <% end %>
-                <%= menu_item :li, [] do %>
-                  <%= link gettext("Sign Out"), to: Routes.pow_session_path(@conn, :delete), method: :delete %>
-                <% end %>
-              <% end %>
-            <% end %>
-          </div>
-        </nav>
+    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-semibold text-xl tracking-tight">Today I Learned</span>
       </div>
+      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div class="text-sm lg:flex-grow">
+          <%= if Pow.Plug.current_user(@conn) == nil do %>
+            <%= link "Register", to: Routes.pow_registration_path(@conn, :new), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" %>
+            <%= link "Sign In", to: Routes.pow_session_path(@conn, :new), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" %>
+          <% else %>
+            <%= link "Settings", to: Routes.pow_registration_path(@conn, :edit), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4" %>
+            <%= link "Sign Out", to: Routes.pow_session_path(@conn, :delete), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4", method: :delete %>
+          <% end %>
+        </div>
+        <div>
+          <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container m-auto">
       <%= @inner_content %>
-    </div> <!-- /container -->
+    </div>
+
     <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

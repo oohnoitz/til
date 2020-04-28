@@ -1,16 +1,14 @@
-<div class="rev-Col rev-Col--large7 rev-Col--smallCentered">
-  <section id="posts" phx-update="<%= @page_update %>">
-    <%= for post <- @posts do %>
-      <%= live_component @socket, TilWeb.PostLive.PostComponent, id: post.id, post: post %>
-    <% end %>
-  </section>
+<section id="posts" phx-update="<%= @page_update %>">
+  <%= for post <- @posts do %>
+    <%= live_component @socket, TilWeb.PostLive.PostComponent, id: post.id, post: post %>
+  <% end %>
+</section>
 
+<section>
   <%= unless @page == 1 do %>
     <%= live_patch "Newer", to: Routes.post_index_path(@socket, :index, page: @page - 1) %>
   <% end %>
-
   <%= if @page < @posts.total_pages do %>
     <%= live_patch "Older", to: Routes.post_index_path(@socket, :index, page: @page + 1) %>
-<% end %>
-</div>
-
+  <% end %>
+</section>
