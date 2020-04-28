@@ -8,14 +8,14 @@
   phx_submit: "save" %>
 
   <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+    <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
       <%= label f, :title, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
       <%= text_input f, :title, class: "appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" %>
       <%= error_tag f, :title, class: "text-red-500 text-xs italic" %>
     </div>
-    <div class="w-full md:w-1/2 px-3">
+    <div class="w-full md:w-1/3 px-3">
       <%= label f, :tag_id, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
-      <%= select f, :tag_id, @tags, class: "block appearance-none w-full border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+      <%= select f, :tag_id, @tags, class: "appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" %>
     </div>
   </div>
 
