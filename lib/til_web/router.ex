@@ -63,12 +63,12 @@ defmodule TilWeb.Router do
     # Use the default browser stack
     pipe_through [:browser]
     live "/", PostLive.Index, :index
-    get "/styleguide", PageController, :styleguide
 
     live "/posts/new", PostLive.Form, :new
     live "/posts/:slug/edit", PostLive.Form, :edit
-
     live "/posts/:slug", PostLive.Show, :show
+
+    get "/random", PostController, :random
   end
 
   if Mix.env() == :dev do

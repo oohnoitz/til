@@ -72,6 +72,26 @@ defmodule Til.Posts do
   end
 
   @doc """
+  Gets a random single post.
+
+  ## Examples
+
+      iex> get_random_post()
+      %Post{}
+
+      iex> get_random_post()
+      nil
+
+  """
+  def get_random_post do
+    Post
+    |> preload([:tag, :user])
+    |> order_by(fragment("RANDOM()"))
+    |> limit(1)
+    |> Repo.one()
+  end
+
+  @doc """
   Creates a post.
 
   ## Examples
