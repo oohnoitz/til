@@ -13,7 +13,6 @@ defmodule TilWeb.PostLive.PostComponent do
         </div>
 
         <div class="flex items-center pt-5">
-          <img class="w-10 h-10 rounded-full mr-4" src="https://picsum.photos/200" alt="Avatar of Jonathan Reinink">
           <div class="text-sm">
             <p class="text-gray-900 leading-none"><%= @post.user.name %></p>
             <p class="text-gray-600"><%= @post.inserted_at %></p>
