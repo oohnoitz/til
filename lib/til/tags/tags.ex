@@ -22,5 +22,6 @@ defmodule Til.Tags do
     |> order_by([t], asc: t.name)
     |> select([t], {t.name, t.id})
     |> Repo.all()
+    |> Enum.map(fn {label, id} -> {"##{label}", id} end)
   end
 end
