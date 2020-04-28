@@ -28,7 +28,7 @@ defmodule Til.Posts do
     Post
     |> order_by([p], desc: p.id)
     |> preload([:tag, :user])
-    |> Repo.paginate(page: page, page_size: 2)
+    |> Repo.paginate(page: page)
   end
 
   @doc """

@@ -62,10 +62,9 @@ defmodule TilWeb.Router do
   scope "/", TilWeb do
     # Use the default browser stack
     pipe_through [:browser]
-    get "/", PageController, :index
+    live "/", PostLive.Index, :index
     get "/styleguide", PageController, :styleguide
 
-    live "/posts", PostLive.Index, :index
     live "/posts/new", PostLive.Form, :new
     live "/posts/:slug/edit", PostLive.Form, :edit
 
