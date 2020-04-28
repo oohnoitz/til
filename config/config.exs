@@ -44,7 +44,7 @@ config :til, jwt_secret: "secret"
 # see releases.exs for production config
 config :til, cluster_topologies: []
 
-config :til, email: {"Til", "noreply@til.org"}
+config :til, email: {"TIL", "til@0x0.pt"}
 
 config :til, :pow,
   user: Til.User,
