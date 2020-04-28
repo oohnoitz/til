@@ -21,6 +21,10 @@ defmodule TilWeb.LiveHelpers do
     live_component(socket, TilWeb.ModalComponent, modal_opts)
   end
 
-  def tab_class(true), do: "bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-700 font-semibold"
-  def tab_class(_), do: "bg-white inline-block py-2 px-4 text-gray-500 hover:text-gray-800 font-semibold"
+  def tab_class(true),
+    do:
+      "bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-700 font-semibold"
+
+  def tab_class(_),
+    do: "bg-white inline-block py-2 px-4 text-gray-500 hover:text-gray-800 font-semibold"
 end
