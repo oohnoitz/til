@@ -4,7 +4,7 @@ defmodule TilWeb.PostLive.PostComponent do
   @impl true
   def render(assigns) do
     ~L"""
-    <article id="post-<%= @post.id %>" class="max-w-3xl rounded overflow-hidden shadow-lg m-auto">
+    <article id="post-<%= @post.id %>" class="max-w-3xl rounded overflow-hidden shadow-lg m-auto mt-5">
       <div class="px-6 py-4">
         <%= live_redirect @post.title, to: Routes.post_show_path(@socket, :show, @post), class: "font-bold text-3xl mb-2" %>
 
