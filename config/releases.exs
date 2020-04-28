@@ -12,7 +12,10 @@ config :til, Til.Repo,
 config :til, TilWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT"))],
   url: [scheme: "https", host: System.get_env("APP_DOMAIN"), port: 443],
-  secret_key_base: System.get_env("SECRET_KEY_BASE")
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  live_view: [
+    signing_salt: System.get_env("LIVE_VIEW_SIGNING_SALT") || System.get_env("SECRET_KEY_BASE")
+  ]
 
 config :rollbax,
   client_token: System.get_env("ROLLBAR_CLIENT_TOKEN"),
