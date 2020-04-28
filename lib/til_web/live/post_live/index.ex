@@ -27,9 +27,14 @@ defmodule TilWeb.PostLive.Index do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     post = Posts.get_post!(id)
-    {:ok, _} = Posts.delete_post(post)
 
-    {:noreply, fetch_posts(socket)}
+    if socket.assigns.user_id == post.user_id do
+      {:ok, _} = Posts.delete_post(post)
+
+      {:noreply, fetch_posts(socket)}
+    else
+      {:noreply, socket}
+    end
   end
 
   @impl true

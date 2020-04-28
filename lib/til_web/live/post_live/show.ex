@@ -30,6 +30,14 @@ defmodule TilWeb.PostLive.Show do
   end
 
   @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    post = Posts.get_post!(id)
+    {:ok, _} = Posts.delete_post(post)
+
+    {:noreply, push_redirect(socket, to: Routes.post_index_path(socket, :index))}
+  end
+
+  @impl true
   def handle_info({:post_updated, post}, socket) do
     {:noreply, update(socket, :post, fn _ -> post end)}
   end
