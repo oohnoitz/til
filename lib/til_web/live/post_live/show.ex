@@ -12,7 +12,7 @@ defmodule TilWeb.PostLive.Show do
     {:ok,
      socket
      |> assign(:post, post)
-     |> apply_title(socket.assigns.live_action)}
+     |> apply_title(:show)}
   end
 
   @impl true
