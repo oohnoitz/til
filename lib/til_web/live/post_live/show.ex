@@ -4,7 +4,7 @@ defmodule TilWeb.PostLive.Show do
   alias Til.Posts
 
   @impl true
-  def mount(_params, %{"post_id" => post_id}, socket) do
+  def mount(_params, %{"post_id" => post_id, "user_id" => user_id}, socket) do
     post = Posts.get_post!(post_id)
 
     if connected?(socket), do: Posts.subscribe("post:#{post.id}")
@@ -12,11 +12,12 @@ defmodule TilWeb.PostLive.Show do
     {:ok,
      socket
      |> assign(:post, post)
+     |> assign(:user_id, user_id)
      |> apply_title(:show)}
   end
 
   @impl true
-  def mount(%{"slug" => slug}, _session, socket) do
+  def mount(%{"slug" => slug}, session, socket) do
     post = Posts.get_post_by_slug!(slug)
 
     if connected?(socket), do: Posts.subscribe("post:#{post.id}")
@@ -24,6 +25,7 @@ defmodule TilWeb.PostLive.Show do
     {:ok,
      socket
      |> assign(:post, post)
+     |> assign(:user_id, session["user_id"])
      |> apply_title(socket.assigns.live_action)}
   end
 

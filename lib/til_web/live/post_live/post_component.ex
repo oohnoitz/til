@@ -8,6 +8,17 @@ defmodule TilWeb.PostLive.PostComponent do
       <div class="px-6 py-4">
         <%= live_redirect @post.title, to: Routes.post_show_path(@socket, :show, @post), class: "font-bold text-3xl mb-2" %>
 
+        <%= if @user_id == @post.user_id do %>
+          <div class="flex items-center">
+            <%= live_redirect to: Routes.post_form_path(@socket, :edit, @post) do %>
+              <gg-icon class="gg-pen"></gg-icon>
+            <% end %>
+            <%= link to: "#", phx_click: "delete", phx_value_id: @post.id, class: "pl-5", data: [confirm: "Are you sure you want to delete this post?"] do %>
+              <gg-icon class="gg-trash"></gg-icon>
+            <% end %>
+          </div>
+        <% end %>
+
         <div class="text-gray-700 text-base pt-5" phx-hook="CodeHighlight">
           <%= raw Til.Markdown.to_html(@post.body) %>
         </div>

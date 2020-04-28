@@ -4,10 +4,11 @@ defmodule TilWeb.PostLive.Index do
   alias Til.Posts
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     if connected?(socket), do: Posts.subscribe()
 
-    {:ok, assign(socket, page: 1, page_update: :prepend), temporary_assigns: [posts: []]}
+    {:ok, assign(socket, page: 1, page_update: :prepend, user_id: session["user_id"]),
+     temporary_assigns: [posts: []]}
   end
 
   @impl true
@@ -45,7 +46,12 @@ defmodule TilWeb.PostLive.Index do
 
   @impl true
   def handle_info({:post_updated, post}, socket) do
-    send_update(TilWeb.PostLive.PostComponent, id: post.id, post: post)
+    send_update(TilWeb.PostLive.PostComponent,
+      id: post.id,
+      post: post,
+      user_id: socket.assigns.user_id
+    )
+
     {:noreply, socket}
   end
 

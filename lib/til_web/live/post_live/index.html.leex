@@ -1,6 +1,6 @@
 <section id="posts" phx-update="<%= @page_update %>">
   <%= for post <- @posts do %>
-    <%= live_component @socket, TilWeb.PostLive.PostComponent, id: post.id, post: post %>
+    <%= live_component @socket, TilWeb.PostLive.PostComponent, id: post.id, post: post, user_id: @user_id %>
   <% end %>
 </section>
 
