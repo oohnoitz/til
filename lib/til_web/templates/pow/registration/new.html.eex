@@ -1,6 +1,11 @@
 <div class="w-full max-w-md m-auto">
   <%= form_for @changeset, @action, [as: :user, class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"], fn f -> %>
     <div class="mb-4">
+      <%= label f, :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= text_input f, :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "Display Name", required: true %>
+      <%= error_tag f, :name, class: "text-red-500 text-xs italic" %>
+    </div>
+    <div class="mb-4">
       <%= label f, :email, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= email_input f, :email, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "user@example.com", required: true %>
       <%= error_tag f, :email, class: "text-red-500 text-xs italic" %>
