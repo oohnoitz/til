@@ -25,7 +25,9 @@ defmodule TilWeb.PostLive.PostComponent do
 
         <div class="flex items-center pt-5">
           <div class="text-sm">
-            <p class="text-gray-900 leading-none"><%= @post.user.name %></p>
+            <p class="text-gray-900 leading-none">
+              <%= live_redirect @post.user.name, to: Routes.author_show_path(@socket, :show, @post.user.name) %>
+            </p>
             <p class="text-gray-600"><%= @post.inserted_at %></p>
           </div>
         </div>
@@ -33,7 +35,7 @@ defmodule TilWeb.PostLive.PostComponent do
 
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         <%= live_redirect "##{@post.tag.name}",
-          to: "#",
+          to: Routes.tag_show_path(@socket, :show, @post.tag.name),
           class: "text-gray-700 text-center border-t-2 px-4 py-2 m-2 uppercase"
         %>
         <%= live_redirect "Permalink",
