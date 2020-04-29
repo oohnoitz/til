@@ -45,6 +45,10 @@ defmodule TilWeb.PostLive.Index do
      |> update(:posts, fn posts -> [post | posts] end)}
   end
 
+  def handle_info({:post_created, _}, socket) do
+    {:noreply, socket}
+  end
+
   @impl true
   def handle_info({:post_updated, post}, socket) do
     send_update(TilWeb.PostLive.PostComponent,
