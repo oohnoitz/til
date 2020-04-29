@@ -23,17 +23,17 @@ LiveHooks.Editor = {
     this.style = {
       height: null,
     }
-  },
-  mounted() {
-    this.init()
 
-    const observer = new MutationObserver((mutations) => {
+    this.observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         this.style.height = mutation.target.style.height
       })
     })
+  },
+  mounted() {
+    this.init()
 
-    observer.observe(
+    this.observer.observe(
       this.el.querySelector('[data-editor]'),
       {
         attributes: true,
@@ -45,6 +45,9 @@ LiveHooks.Editor = {
     if (this.style.height) {
       this.el.querySelector('[data-editor]').style.height = this.style.height
     }
+  },
+  beforeDestroy() {
+    this.observer.disconnect()
   },
 }
 
