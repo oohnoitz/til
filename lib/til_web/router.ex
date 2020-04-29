@@ -64,9 +64,13 @@ defmodule TilWeb.Router do
     pipe_through [:browser]
     live "/", PostLive.Index, :index
 
+    live "/author/:name", AuthorLive.Show, :show
+
     live "/posts/new", PostLive.Form, :new
     live "/posts/:slug/edit", PostLive.Form, :edit
     live "/posts/:slug", PostLive.Show, :show
+
+    live "/tag/:tag", TagLive.Show, :show
 
     get "/random", PostController, :random
   end

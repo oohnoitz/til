@@ -31,6 +31,22 @@ defmodule Til.Posts do
     |> Repo.paginate(page: page)
   end
 
+  def list_posts_by_tag(tag_id, page) do
+    Post
+    |> where([p], p.tag_id == ^tag_id)
+    |> order_by([p], desc: p.id)
+    |> preload([:tag, :user])
+    |> Repo.paginate(page: page)
+  end
+
+  def list_posts_by_user(user_id, page) do
+    Post
+    |> where([p], p.user_id == ^user_id)
+    |> order_by([p], desc: p.id)
+    |> preload([:tag, :user])
+    |> Repo.paginate(page: page)
+  end
+
   @doc """
   Gets a single post.
 

@@ -24,4 +24,8 @@ defmodule Til.Tags do
     |> Repo.all()
     |> Enum.map(fn {label, id} -> {"##{label}", id} end)
   end
+
+  def get_tag_by_name!(name) do
+    Repo.get_by!(Tag, name: name)
+  end
 end
