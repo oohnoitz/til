@@ -43,7 +43,7 @@
   <div class="flex flex-wrap mb-6 pt-5 border-b border-l border-r">
     <%= if @preview? do %>
       <div class="w-full px-3">
-        <div class="w-full py-3 px-4 mb-3" phx-hook="CodeHighlight">
+        <div class="w-full py-3 px-4 mb-3 markdown" phx-hook="CodeHighlight">
           <%= raw Til.Markdown.to_html(input_value(f, :body)) %>
           <%= hidden_input f, :body %>
         </div>

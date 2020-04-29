@@ -1,0 +1,5 @@
+.markdown {
+  p:not(:first-child):not(:last-child) {
+    margin: 2rem auto;
+  }
+}

@@ -19,7 +19,7 @@ defmodule TilWeb.PostLive.PostComponent do
           </div>
         <% end %>
 
-        <div class="text-gray-700 text-base pt-5" phx-hook="CodeHighlight">
+        <div class="text-gray-700 text-base pt-5 markdown" phx-hook="CodeHighlight">
           <%= raw Til.Markdown.to_html(@post.body) %>
         </div>
 
