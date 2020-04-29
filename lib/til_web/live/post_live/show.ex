@@ -32,9 +32,14 @@ defmodule TilWeb.PostLive.Show do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     post = Posts.get_post!(id)
-    {:ok, _} = Posts.delete_post(post)
 
-    {:noreply, push_redirect(socket, to: Routes.post_index_path(socket, :index))}
+    if socket.assigns.user_id == post.user_id do
+      {:ok, _} = Posts.delete_post(post)
+
+      {:noreply, push_redirect(socket, to: Routes.post_index_path(socket, :index))}
+    else
+      {:noreply, socket}
+    end
   end
 
   @impl true
