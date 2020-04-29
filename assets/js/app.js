@@ -47,6 +47,15 @@ function setupLiveView() {
 }
 
 function init(_config) {
+  const nav = document.querySelector('nav')
+  const navMenu = nav.querySelector('[data-nav-menu]')
+  const navToggle = nav.querySelector('button')
+
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('hidden')
+    navMenu.classList.toggle('block')
+  })
+
   updateTimeTags()
   feather.replace()
   Harmonium.setup()
