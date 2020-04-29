@@ -3,10 +3,7 @@ import Config
 # NOTE: Runtime production configuration goes here
 
 config :til, Til.Repo,
-  database: System.get_env("POSTGRES_DATABASE") || "postgres",
-  username: System.get_env("POSTGRES_USER"),
-  password: System.get_env("POSTGRES_PASSWORD"),
-  hostname: System.get_env("POSTGRES_HOSTNAME") || "til-database",
+  url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
 config :til, TilWeb.Endpoint,
