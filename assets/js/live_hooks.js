@@ -18,4 +18,34 @@ LiveHooks.CodeHighlight = {
   },
 }
 
+LiveHooks.Editor = {
+  init() {
+    this.style = {
+      height: null,
+    }
+  },
+  mounted() {
+    this.init()
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        this.style.height = mutation.target.style.height
+      })
+    })
+
+    observer.observe(
+      this.el.querySelector('[data-editor]'),
+      {
+        attributes: true,
+        attributeFilter: ['style'],
+      }
+    )
+  },
+  updated() {
+    if (this.style.height) {
+      this.el.querySelector('[data-editor]').style.height = this.style.height
+    }
+  },
+}
+
 export default LiveHooks
