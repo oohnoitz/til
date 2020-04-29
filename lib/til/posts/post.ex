@@ -2,6 +2,8 @@ defmodule Til.Posts.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Phoenix.Param, key: :slug}
+
   schema "posts" do
     field(:title, :string)
     field(:body, :string, default: "")
@@ -43,9 +45,5 @@ defmodule Til.Posts.Post do
     |> String.downcase()
     |> String.replace(~r/[^A-Za-z0-9\s-]/, "")
     |> String.replace(~r/(\s|-)+/, "-")
-  end
-
-  defimpl Phoenix.Param, for: Til.Posts.Post do
-    def to_param(%{slug: slug}), do: slug
   end
 end
