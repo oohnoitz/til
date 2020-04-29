@@ -9,6 +9,7 @@ defmodule Til.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      consolidate_protocols: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
