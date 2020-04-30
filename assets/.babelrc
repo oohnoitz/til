@@ -25,7 +25,7 @@
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-proposal-json-strings",
     ["prismjs", {
-      "languages": ["css", "javascript", "elixir"],
+      "languages": ["html", "css", "javascript", "elixir"],
       "plugins": ["line-numbers"]
     }]
   ],
