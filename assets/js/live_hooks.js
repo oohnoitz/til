@@ -20,31 +20,28 @@ LiveHooks.CodeHighlight = {
 
 LiveHooks.Editor = {
   init() {
-    this.style = {
-      height: null,
-    }
+    this.style = {}
 
     this.observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         this.style.height = mutation.target.style.height
+        this.style.width = mutation.target.style.width
       })
     })
   },
   mounted() {
-    this.init()
+    const element = this.el.querySelector('[data-editor]')
 
-    this.observer.observe(
-      this.el.querySelector('[data-editor]'),
-      {
-        attributes: true,
-        attributeFilter: ['style'],
-      }
-    )
+    this.init()
+    this.observer.observe(element, {
+      attributes: true,
+      attributeFilter: ['style'],
+    })
   },
   updated() {
-    if (this.style.height) {
-      this.el.querySelector('[data-editor]').style.height = this.style.height
-    }
+    const element = this.el.querySelector('[data-editor]')
+
+    Object.assign(element.style, this.style)
   },
   beforeDestroy() {
     this.observer.disconnect()
