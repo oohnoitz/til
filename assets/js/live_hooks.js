@@ -34,7 +34,7 @@ LiveHooks.Editor = {
     this.init()
 
     this.observer.observe(
-      this.el.querySelector('[data-editor]'),
+      this.el,
       {
         attributes: true,
         attributeFilter: ['style'],
@@ -43,7 +43,7 @@ LiveHooks.Editor = {
   },
   updated() {
     if (this.style.height) {
-      this.el.querySelector('[data-editor]').style.height = this.style.height
+      this.el.style.height = this.style.height
     }
   },
   beforeDestroy() {
