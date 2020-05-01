@@ -9,11 +9,11 @@ defmodule TilWeb.PostLive.Show do
 
     if connected?(socket), do: Posts.subscribe("post:#{post.id}")
 
-    {:ok,
-     socket
-     |> assign(:post, post)
-     |> assign(:user_id, user_id)
-     |> apply_title(:show)}
+    socket
+    |> assign(:post, post)
+    |> assign(:user_id, user_id)
+    |> apply_title(:show)
+    |> ok()
   end
 
   @impl true
@@ -22,29 +22,25 @@ defmodule TilWeb.PostLive.Show do
 
     if connected?(socket), do: Posts.subscribe("post:#{post.id}")
 
-    {:ok,
-     socket
-     |> assign(:post, post)
-     |> assign(:user_id, session["user_id"])
-     |> apply_title(socket.assigns.live_action)}
+    socket
+    |> assign(:post, post)
+    |> assign(:user_id, session["user_id"])
+    |> apply_title(socket.assigns.live_action)
+    |> ok()
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    post = Posts.get_post!(id)
-
-    if socket.assigns.user_id == post.user_id do
-      {:ok, _} = Posts.delete_post(post)
-
-      {:noreply, push_redirect(socket, to: Routes.post_index_path(socket, :index))}
-    else
-      {:noreply, socket}
-    end
+  def handle_info({:post_deleted, _}, socket) do
+    socket
+    |> push_redirect(to: Routes.post_index_path(socket, :index))
+    |> noreply()
   end
 
   @impl true
   def handle_info({:post_updated, post}, socket) do
-    {:noreply, update(socket, :post, fn _ -> post end)}
+    socket
+    |> update(:post, fn _ -> post end)
+    |> noreply()
   end
 
   defp apply_title(socket, :show) do
