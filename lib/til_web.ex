@@ -21,9 +21,11 @@ defmodule TilWeb do
     quote do
       use Phoenix.Controller, namespace: TilWeb
       import Plug.Conn
-      alias TilWeb.Router.Helpers, as: Routes
-      import TilWeb.Gettext
       import Phoenix.LiveView.Controller
+
+      import TilWeb.Gettext
+
+      alias TilWeb.Router.Helpers, as: Routes
     end
   end
 
@@ -39,12 +41,14 @@ defmodule TilWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      alias TilWeb.Router.Helpers, as: Routes
-      alias TilWeb.ErrorHelpers
-      import TilWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers
-      import TilWeb.LiveHelpers
+
+      import TilWeb.Gettext
+
+      alias TilWeb.Router.Helpers, as: Routes
+      alias TilWeb.ErrorHelpers
+      alias TilWeb.LiveHelpers
     end
   end
 
@@ -57,12 +61,14 @@ defmodule TilWeb do
       use Phoenix.HTML
       import Phoenix.View
 
-      alias TilWeb.Router.Helpers, as: Routes
-      alias TilWeb.ErrorHelpers
-      import TilWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers
-      import TilWeb.LiveHelpers
+
+      import TilWeb.Gettext
+
+      alias TilWeb.Router.Helpers, as: Routes
+      alias TilWeb.ErrorHelpers
+      alias TilWeb.LiveHelpers
     end
   end
 
@@ -74,12 +80,14 @@ defmodule TilWeb do
       use Phoenix.HTML
       import Phoenix.View
 
-      alias TilWeb.Router.Helpers, as: Routes
-      alias TilWeb.ErrorHelpers
-      import TilWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers
-      import TilWeb.LiveHelpers
+
+      import TilWeb.Gettext
+
+      alias TilWeb.Router.Helpers, as: Routes
+      alias TilWeb.ErrorHelpers
+      alias TilWeb.LiveHelpers
     end
   end
 

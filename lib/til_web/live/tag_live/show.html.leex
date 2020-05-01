@@ -14,12 +14,12 @@
 <ul class="flex max-w-3xl m-auto pt-5 pb-5">
   <li class="text-center flex-1 mr-2">
     <%= if @page > 1 do %>
-      <%= live_patch "Newer", to: Routes.tag_show_path(@socket, :show, @tag.name, page: @page - 1), class: pagination_class(@page - 1, @posts.total_pages), replace: true %>
+      <%= live_patch "Newer", to: Routes.tag_show_path(@socket, :show, @tag.name, page: @page - 1), class: LiveHelpers.pagination_class(@page - 1, @posts.total_pages), replace: true %>
     <% end %>
   </li>
   <li class="text-center flex-1 mr-2">
     <%= if @page < @posts.total_pages do %>
-      <%= live_patch "Older", to: Routes.tag_show_path(@socket, :show, @tag.name, page: @page + 1), class: pagination_class(@page + 1, @posts.total_pages), replace: true %>
+      <%= live_patch "Older", to: Routes.tag_show_path(@socket, :show, @tag.name, page: @page + 1), class: LiveHelpers.pagination_class(@page + 1, @posts.total_pages), replace: true %>
     <% end %>
   </li>
 </ul>

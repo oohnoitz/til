@@ -13,7 +13,7 @@ defmodule TilWeb.TagLive.Show do
     socket
     |> assign(tag: tag)
     |> assign(user_id: session["user_id"])
-    |> ok(temporary_assigns: [posts: []])
+    |> LiveHelpers.ok(temporary_assigns: [posts: []])
   end
 
   @impl true
@@ -21,19 +21,19 @@ defmodule TilWeb.TagLive.Show do
     socket
     |> apply_action(socket.assigns.live_action, params)
     |> assign_posts
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   @impl true
   def handle_info({:post_created, _}, socket) do
-    noreply(socket)
+    LiveHelpers.noreply(socket)
   end
 
   @impl true
   def handle_info({:post_deleted, _}, socket) do
     socket
     |> assign_posts()
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   @impl true
@@ -44,7 +44,7 @@ defmodule TilWeb.TagLive.Show do
       user_id: socket.assigns.user_id
     )
 
-    noreply(socket)
+    LiveHelpers.noreply(socket)
   end
 
   defp apply_action(socket, :show, params) do

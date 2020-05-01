@@ -13,7 +13,7 @@ defmodule TilWeb.PostLive.Show do
     |> assign(:post, post)
     |> assign(:user_id, user_id)
     |> apply_title(:show)
-    |> ok()
+    |> LiveHelpers.ok()
   end
 
   @impl true
@@ -26,21 +26,21 @@ defmodule TilWeb.PostLive.Show do
     |> assign(:post, post)
     |> assign(:user_id, session["user_id"])
     |> apply_title(socket.assigns.live_action)
-    |> ok()
+    |> LiveHelpers.ok()
   end
 
   @impl true
   def handle_info({:post_deleted, _}, socket) do
     socket
     |> push_redirect(to: Routes.post_index_path(socket, :index))
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   @impl true
   def handle_info({:post_updated, post}, socket) do
     socket
     |> update(:post, fn _ -> post end)
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   defp apply_title(socket, :show) do

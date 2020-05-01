@@ -24,7 +24,7 @@
     <li class="-mb-px mr-1">
       <%= link "Write",
         to: "#",
-        class: tab_class(!@preview?),
+        class: LiveHelpers.tab_class(!@preview?),
         phx_click: :mode,
         phx_value_mode: :write,
         phx_target: @myself
@@ -33,7 +33,7 @@
     <li class="-mb-px mr-1">
       <%= link "Preview",
         to: "#",
-        class: tab_class(@preview?),
+        class: LiveHelpers.tab_class(@preview?),
         phx_click: :mode,
         phx_value_mode: :preview,
         phx_target: @myself

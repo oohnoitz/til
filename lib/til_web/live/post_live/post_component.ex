@@ -62,10 +62,10 @@ defmodule TilWeb.PostLive.PostComponent do
     with true <- socket.assigns.user_id == post.user_id,
          {:ok, _} = Posts.delete_post(post) do
       send(self(), {:post_deleted, nil})
-      noreply(socket)
+      LiveHelpers.noreply(socket)
     else
       _ ->
-        noreply(socket)
+        LiveHelpers.noreply(socket)
     end
   end
 
@@ -73,6 +73,6 @@ defmodule TilWeb.PostLive.PostComponent do
   def handle_event("like", _, socket) do
     Til.Posts.increment_likes(socket.assigns.post)
 
-    noreply(socket)
+    LiveHelpers.noreply(socket)
   end
 end

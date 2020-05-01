@@ -13,7 +13,7 @@ defmodule TilWeb.PostLive.FormComponent do
     |> assign(:changeset, changeset)
     |> assign(:tags, Tags.name_and_ids())
     |> assign(:preview?, false)
-    |> ok()
+    |> LiveHelpers.ok()
   end
 
   @impl true
@@ -25,13 +25,13 @@ defmodule TilWeb.PostLive.FormComponent do
 
     socket
     |> assign(:changeset, changeset)
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   def handle_event("mode", %{"mode" => mode}, socket) when mode in ["write", "preview"] do
     socket
     |> assign(:preview?, mode === "preview")
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
@@ -44,12 +44,12 @@ defmodule TilWeb.PostLive.FormComponent do
         socket
         |> put_flash(:info, "Post updated successfully")
         |> push_redirect(to: Routes.post_show_path(socket, :show, post))
-        |> noreply()
+        |> LiveHelpers.noreply()
 
       {:error, %Ecto.Changeset{} = changeset} ->
         socket
         |> assign(:changeset, changeset)
-        |> noreply()
+        |> LiveHelpers.noreply()
     end
   end
 
@@ -61,12 +61,12 @@ defmodule TilWeb.PostLive.FormComponent do
         socket
         |> put_flash(:info, "Post created successfully")
         |> push_redirect(to: Routes.post_show_path(socket, :show, post))
-        |> noreply()
+        |> LiveHelpers.noreply()
 
       {:error, %Ecto.Changeset{} = changeset} ->
         socket
         |> assign(:changeset, changeset)
-        |> noreply()
+        |> LiveHelpers.noreply()
     end
   end
 end

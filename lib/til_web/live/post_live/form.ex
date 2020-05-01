@@ -8,21 +8,21 @@ defmodule TilWeb.PostLive.Form do
   def mount(_params, session, socket) do
     socket
     |> assign(user_id: session["user_id"])
-    |> ok()
+    |> LiveHelpers.ok()
   end
 
   def handle_params(_params, _url, %{assigns: %{user_id: nil}} = socket) do
     socket
     |> put_flash(:error, "You must be logged in to create a new post.")
     |> push_redirect(to: Routes.pow_session_path(socket, :new))
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: action}} = socket) do
     socket
     |> apply_action(action, params)
-    |> noreply()
+    |> LiveHelpers.noreply()
   end
 
   defp apply_action(socket, :edit, %{"slug" => slug}) do
