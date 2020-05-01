@@ -40,7 +40,7 @@ defmodule TilWeb do
       use Phoenix.HTML
 
       alias TilWeb.Router.Helpers, as: Routes
-      import TilWeb.ErrorHelpers
+      alias TilWeb.ErrorHelpers
       import TilWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers
@@ -58,7 +58,7 @@ defmodule TilWeb do
       import Phoenix.View
 
       alias TilWeb.Router.Helpers, as: Routes
-      import TilWeb.ErrorHelpers
+      alias TilWeb.ErrorHelpers
       import TilWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers
@@ -75,7 +75,7 @@ defmodule TilWeb do
       import Phoenix.View
 
       alias TilWeb.Router.Helpers, as: Routes
-      import TilWeb.ErrorHelpers
+      alias TilWeb.ErrorHelpers
       import TilWeb.Gettext
       import Harmonium
       import Phoenix.LiveView.Helpers

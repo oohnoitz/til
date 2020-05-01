@@ -5,7 +5,7 @@
     <div class="mb-4">
       <%= label f, :email, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
       <%= text_input f, :email, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
-      <%= error_tag f, :email, class: "text-red-500 text-xs italic" %>
+      <%= ErrorHelpers.error_tag f, :email, class: "text-red-500 text-xs italic" %>
     </div>
     <div class="mb-6">
       <%= label f, :name, class: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" %>
@@ -15,17 +15,17 @@
           Click the link in the confirmation email to change your email to <%= content_tag(:span, @changeset.data.unconfirmed_email) %>.
         </p>
       <% end %>
-      <%= error_tag f, :name, class: "text-red-500 text-xs italic" %>
+      <%= ErrorHelpers.error_tag f, :name, class: "text-red-500 text-xs italic" %>
     </div>
     <div class="mb-6">
       <%= label f, :current_password, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= password_input f, :current_password, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "****************", required: true %>
-      <%= error_tag f, :current_password, class: "text-red-500 text-xs italic" %>
+      <%= ErrorHelpers.error_tag f, :current_password, class: "text-red-500 text-xs italic" %>
     </div>
     <div class="mb-6">
       <%= label f, :password, class: "block text-gray-700 text-sm font-bold mb-2" %>
       <%= password_input f, :password, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder: "****************", required: true %>
-      <%= error_tag f, :password, class: "text-red-500 text-xs italic" %>
+      <%= ErrorHelpers.error_tag f, :password, class: "text-red-500 text-xs italic" %>
     </div>
     <div class="flex items-center justify-between">
       <%= submit gettext("Update"), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
