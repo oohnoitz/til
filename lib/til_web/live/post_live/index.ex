@@ -21,25 +21,17 @@ defmodule TilWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    post = Posts.get_post!(id)
-
-    with true <- socket.assigns.user_id == post.user_id,
-         {:ok, _} = Posts.delete_post(post) do
-      socket
-      |> assign_posts()
-      |> noreply()
-    else
-      _ ->
-        noreply(socket)
-    end
-  end
-
-  @impl true
   def handle_info({:post_created, post}, %{assigns: %{page: page}} = socket) when page == 1 do
     socket
     |> update(:page_update, fn _ -> :prepend end)
     |> update(:posts, fn posts -> [post | posts] end)
+    |> noreply()
+  end
+
+  @impl true
+  def handle_info({:post_deleted, _}, socket) do
+    socket
+    |> assign_posts()
     |> noreply()
   end
 

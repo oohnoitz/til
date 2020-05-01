@@ -1,6 +1,8 @@
 defmodule TilWeb.PostLive.PostComponent do
   use TilWeb, :live_component
 
+  alias Til.Posts
+
   @impl true
   def render(assigns) do
     ~L"""
@@ -13,7 +15,7 @@ defmodule TilWeb.PostLive.PostComponent do
             <%= live_redirect to: Routes.post_form_path(@socket, :edit, @post) do %>
               <gg-icon class="gg-pen"></gg-icon>
             <% end %>
-            <%= link to: "#", phx_click: "delete", phx_value_id: @post.id, class: "pl-5", data: [confirm: "Are you sure you want to delete this post?"] do %>
+            <%= link to: "#", phx_click: "delete", phx_value_id: @post.id, phx_target: @myself, class: "pl-5", data: [confirm: "Are you sure you want to delete this post?"] do %>
               <gg-icon class="gg-trash"></gg-icon>
             <% end %>
           </div>
@@ -54,9 +56,23 @@ defmodule TilWeb.PostLive.PostComponent do
   end
 
   @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    post = Posts.get_post!(id)
+
+    with true <- socket.assigns.user_id == post.user_id,
+         {:ok, _} = Posts.delete_post(post) do
+      send(self(), {:post_deleted, nil})
+      noreply(socket)
+    else
+      _ ->
+        noreply(socket)
+    end
+  end
+
+  @impl true
   def handle_event("like", _, socket) do
     Til.Posts.increment_likes(socket.assigns.post)
 
-    {:noreply, socket}
+    noreply(socket)
   end
 end

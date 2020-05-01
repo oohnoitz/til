@@ -30,6 +30,13 @@ defmodule TilWeb.TagLive.Show do
   end
 
   @impl true
+  def handle_info({:post_deleted, _}, socket) do
+    socket
+    |> assign_posts()
+    |> noreply()
+  end
+
+  @impl true
   def handle_info({:post_updated, post}, socket) do
     send_update(TilWeb.PostLive.PostComponent,
       id: post.id,

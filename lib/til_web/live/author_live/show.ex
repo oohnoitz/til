@@ -25,23 +25,15 @@ defmodule TilWeb.AuthorLive.Show do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    post = Posts.get_post!(id)
-
-    with true <- socket.assigns.user_id == post.user_id,
-         {:ok, _} = Posts.delete_post(post) do
-      socket
-      |> assign_posts()
-      |> noreply()
-    else
-      _ ->
-        noreply(socket)
-    end
+  def handle_info({:post_created, _}, socket) do
+    noreply(socket)
   end
 
   @impl true
-  def handle_info({:post_created, _}, socket) do
-    noreply(socket)
+  def handle_info({:post_deleted, _}, socket) do
+    socket
+    |> assign_posts()
+    |> noreply()
   end
 
   @impl true
