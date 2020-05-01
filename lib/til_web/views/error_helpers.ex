@@ -10,7 +10,11 @@ defmodule TilWeb.ErrorHelpers do
   """
   def error_tag(form, field, opts \\ [class: "help-block"]) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error), [phx_feedback_for: input_id(form, field)] ++ opts)
+      content_tag(
+        :span,
+        translate_error(error),
+        [phx_feedback_for: input_id(form, field)] ++ opts
+      )
     end)
   end
 

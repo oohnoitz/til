@@ -8,12 +8,12 @@ defmodule TilWeb.PostLive.FormComponent do
   def update(%{post: post} = assigns, socket) do
     changeset = Posts.change_post(post)
 
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(:changeset, changeset)
-     |> assign(:tags, Tags.name_and_ids())
-     |> assign(:preview?, false)}
+    socket
+    |> assign(assigns)
+    |> assign(:changeset, changeset)
+    |> assign(:tags, Tags.name_and_ids())
+    |> assign(:preview?, false)
+    |> ok()
   end
 
   @impl true
@@ -23,11 +23,15 @@ defmodule TilWeb.PostLive.FormComponent do
       |> Posts.change_post(post_params)
       |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+    socket
+    |> assign(:changeset, changeset)
+    |> noreply()
   end
 
   def handle_event("mode", %{"mode" => mode}, socket) when mode in ["write", "preview"] do
-    {:noreply, assign(socket, :preview?, mode === "preview")}
+    socket
+    |> assign(:preview?, mode === "preview")
+    |> noreply()
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
@@ -37,30 +41,32 @@ defmodule TilWeb.PostLive.FormComponent do
   defp save_post(socket, :edit, post_params) do
     case Posts.update_post(socket.assigns.post, post_params) do
       {:ok, post} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Post updated successfully")
-         |> push_redirect(to: Routes.post_show_path(socket, :show, post))}
+        socket
+        |> put_flash(:info, "Post updated successfully")
+        |> push_redirect(to: Routes.post_show_path(socket, :show, post))
+        |> noreply()
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, :changeset, changeset)}
+        socket
+        |> assign(:changeset, changeset)
+        |> noreply()
     end
   end
 
   defp save_post(socket, :new, post_params) do
-    post_params =
-      post_params
-      |> Map.merge(%{"user_id" => socket.assigns.user_id})
+    post_params = Map.merge(post_params, %{"user_id" => socket.assigns.user_id})
 
     case Posts.create_post(post_params) do
       {:ok, post} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, "Post created successfully")
-         |> push_redirect(to: Routes.post_show_path(socket, :show, post))}
+        socket
+        |> put_flash(:info, "Post created successfully")
+        |> push_redirect(to: Routes.post_show_path(socket, :show, post))
+        |> noreply()
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        socket
+        |> assign(:changeset, changeset)
+        |> noreply()
     end
   end
 end

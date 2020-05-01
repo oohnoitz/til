@@ -7,46 +7,45 @@ defmodule TilWeb.PostLive.Index do
   def mount(_params, session, socket) do
     if connected?(socket), do: Posts.subscribe()
 
-    {:ok, assign(socket, page: 1, page_update: :prepend, user_id: session["user_id"]),
-     temporary_assigns: [posts: []]}
+    socket
+    |> assign(user_id: session["user_id"])
+    |> ok(temporary_assigns: [posts: []])
   end
 
   @impl true
   def handle_params(params, _url, socket) do
-    {page, ""} = Integer.parse(params["page"] || "1")
-    page = if page < 1, do: 1, else: page
-
-    {:noreply,
-     socket
-     |> assign(page: page)
-     |> assign(page_title: "0x0")
-     |> assign(page_update: :replace)
-     |> fetch_posts()}
+    socket
+    |> apply_action(socket.assigns.live_action, params)
+    |> assign_posts
+    |> noreply()
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     post = Posts.get_post!(id)
 
-    if socket.assigns.user_id == post.user_id do
-      {:ok, _} = Posts.delete_post(post)
-
-      {:noreply, fetch_posts(socket)}
+    with true <- socket.assigns.user_id == post.user_id,
+         {:ok, _} = Posts.delete_post(post) do
+      socket
+      |> assign_posts()
+      |> noreply()
     else
-      {:noreply, socket}
+      _ ->
+        noreply(socket)
     end
   end
 
   @impl true
   def handle_info({:post_created, post}, %{assigns: %{page: page}} = socket) when page == 1 do
-    {:noreply,
-     socket
-     |> update(:page_update, fn _ -> :prepend end)
-     |> update(:posts, fn posts -> [post | posts] end)}
+    socket
+    |> update(:page_update, fn _ -> :prepend end)
+    |> update(:posts, fn posts -> [post | posts] end)
+    |> noreply()
   end
 
+  @impl true
   def handle_info({:post_created, _}, socket) do
-    {:noreply, socket}
+    noreply(socket)
   end
 
   @impl true
@@ -57,10 +56,20 @@ defmodule TilWeb.PostLive.Index do
       user_id: socket.assigns.user_id
     )
 
-    {:noreply, socket}
+    noreply(socket)
   end
 
-  defp fetch_posts(socket) do
+  defp apply_action(socket, :index, params) do
+    {page, ""} = Integer.parse(params["page"] || "1")
+    page = if page < 1, do: 1, else: page
+
+    socket
+    |> assign(page: page)
+    |> assign(page_title: "0x0")
+    |> assign(page_update: :replace)
+  end
+
+  defp assign_posts(socket) do
     assign(socket, posts: Posts.list_posts(socket.assigns.page))
   end
 end

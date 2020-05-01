@@ -21,6 +21,10 @@ defmodule TilWeb.LiveHelpers do
     live_component(socket, TilWeb.ModalComponent, modal_opts)
   end
 
+  def noreply(socket), do: {:noreply, socket}
+  def ok(socket), do: {:ok, socket}
+  def ok(socket, opts), do: {:ok, socket, opts}
+
   def tab_class(true),
     do:
       "bg-white inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-700 font-semibold"
