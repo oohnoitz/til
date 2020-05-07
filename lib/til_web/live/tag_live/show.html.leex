@@ -1,5 +1,5 @@
 <div class="text-center">
-  <%= gettext("%{count} posts about %{tag}", %{
+  <%= gettext("%{count} posts about #%{tag}", %{
     count: @posts.total_entries,
     tag: @tag.name
   }) %>
