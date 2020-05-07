@@ -35,16 +35,16 @@ defmodule TilWeb.PostLive.PostComponent do
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3">
         <%= live_redirect "##{@post.tag.name}",
           to: Routes.tag_show_path(@socket, :show, @post.tag.name),
-          class: "text-gray-700 text-center border-t-2 px-4 py-2 m-2 uppercase"
+          class: "text-gray-700 text-center border-t-2 p-2 m-2 uppercase"
         %>
         <%= live_redirect "Permalink",
           to: Routes.post_show_path(@socket, :show, @post),
-          class: "text-gray-700 text-center border-t-2 px-4 py-2 m-2 uppercase"
+          class: "text-gray-700 text-center border-t-2 p-2 m-2 uppercase"
         %>
-        <button class="text-gray-700 text-center border-t-2 px-4 py-2 m-2" type="button" phx-click="like" phx-target="<%= @myself %>">
+        <button class="text-gray-700 text-center border-t-2 p-2 m-2" type="button" phx-click="like" phx-target="<%= @myself %>">
           <div class="flex items-center justify-center">
             <gg-icon class="gg-heart"></gg-icon>
             <span class="pl-3"><%= @post.likes %></span>
