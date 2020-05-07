@@ -11,8 +11,13 @@
     margin-bottom: 0;
   }
 
-  ul, ol {
-    list-style: square;
+  ol {
+    list-style-type: decimal;
+    padding-left: 2rem;
+  }
+
+  ul {
+    list-style-type: square;
     padding-left: 2rem;
   }
 }
