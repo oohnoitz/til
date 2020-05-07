@@ -32,16 +32,20 @@ LiveHooks.Editor = {
   mounted() {
     const element = this.el.querySelector('[data-editor]')
 
-    this.init()
-    this.observer.observe(element, {
-      attributes: true,
-      attributeFilter: ['style'],
-    })
+    if (element) {
+      this.init()
+      this.observer.observe(element, {
+        attributes: true,
+        attributeFilter: ['style'],
+      })
+    }
   },
   updated() {
     const element = this.el.querySelector('[data-editor]')
 
-    Object.assign(element.style, this.style)
+    if (element) {
+      Object.assign(element.style, this.style)
+    }
   },
   beforeDestroy() {
     this.observer.disconnect()
