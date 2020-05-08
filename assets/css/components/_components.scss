@@ -20,6 +20,12 @@
     list-style-type: square;
     padding-left: 2rem;
   }
+
+  ol, ul {
+    p {
+      margin: 0;
+    }
+  }
 }
 
 .text-red-500.phx-no-feedback {
