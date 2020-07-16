@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/assets"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+- package-ecosystem: mix
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
