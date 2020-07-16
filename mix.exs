@@ -77,7 +77,7 @@ defmodule Til.Mixfile do
       {:prometheus_process_collector, "~> 1.4"},
       {:libcluster, "~> 3.0"},
       {:pow, "~> 1.0"},
-      {:phoenix_live_view, "~> 0.12.0"},
+      {:phoenix_live_view, "~> 0.13.3"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.1"},
       {:earmark, "~> 1.4"},
