@@ -19,7 +19,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "regenerator-runtime": "^0.13.7",
-    "tailwindcss": "^1.6.0",
+    "tailwindcss": "^1.8.10",
     "transmit": "file:../deps/transmit"
   },
   "devDependencies": {
