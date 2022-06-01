@@ -42,7 +42,7 @@ defmodule Til.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5.0", override: true},
+      {:phoenix, "~> 1.6.10", override: true},
       {:phoenix_pubsub, "~> 2.0"},
       {:ecto_sql, "~> 3.4"},
       {:phoenix_ecto, "~> 4.0"},
